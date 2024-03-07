@@ -1,0 +1,30 @@
+{
+  "name": "private-ip-fanatic",
+  "version": "1.0.0",
+  "description": "check if ip is private",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aveWorld/private-ip.git"
+  },
+  "keywords": [
+    "ip",
+    "tea"
+  ],
+  "author": "fanatic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aveWorld/private-ip/issues"
+  },
+  "homepage": "https://github.com/aveWorld/private-ip#readme",
+  "dependencies": {
+    "@chainsafe/is-ip": "^2.0.2",
+    "get-ip-fanatic": "^1.0.3",
+    "ip-regex": "^5.0.0",
+    "ipaddr.js": "^2.1.0",
+    "netmask": "^2.0.2"
+  }
+}
