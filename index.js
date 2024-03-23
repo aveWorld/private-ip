@@ -63,6 +63,49 @@ function ipv6_check(ip_addr) {
     /^ff([0-9a-fA-F]{2,2}):/i.test(ip_addr)
   );
 }
+function getChunkInfo(length, options) {
+  let from = options.from;
+  let limit = options.limit;
+  let to = options.to;
+  let maxLength;
+  const addressBigInteger = this.constructor.formatIP(this.address, { type: 'bigInteger' });
+
+  const getBigInteger = (val) => {
+    if (typeof val == 'string' && val.match(/:|\./)) {
+      return (
+        this.constructor.formatIP(this.constructor.createAddress(val), { type: 'bigInteger' }) -
+        addressBigInteger
+      );
+    } else if (typeof val != 'object') {
+      return BigInt(val + '');
+    }
+
+    return val;
+  };
+
+  from = getBigInteger(from !== undefined ? from : 0);
+
+  if (to !== undefined) {
+    to = getBigInteger(to);
+    limit = to - from;
+  } else {
+    limit = limit !== undefined ? getBigInteger(limit) : length;
+  }
+
+  maxLength = length - from;
+
+  if (limit > maxLength) {
+    limit = maxLength;
+  }
+
+  to = from + limit;
+  return {
+    from: from,
+    to: to,
+    limit: limit,
+    length: length,
+  };
+}
 export default (ip) => {
   if (is_valid(ip)) {
     const parsed = parse(ip);
